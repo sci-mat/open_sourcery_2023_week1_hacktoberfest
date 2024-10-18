@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Suhas Kanwar" />
+    <meta
+      name="keywords"
+      content="Tic-Tac-Toe, game, online game, classic game, multiplayer, Xs and Os, Noughts and Crosses"
+    />
+    <meta
+      name="Description"
+      content="Play the classic Tic-Tac-Toe game. Enjoy a simple, fun, and interactive game with friends."
+    />
+    <title>Xs and Os</title>
+    <link
+      rel="shortcut icon"
+      href="assets/images/favicon.png"
+      type="image/x-icon"
+    />
+    <style>
+      :root {
+        --heading-color: rgb(238, 229, 233);
+        --caption-color: rgb(146, 220, 229);
+        --button-color: rgb(241, 237, 244);
+        --X-color: rgb(229, 89, 52);
+        --O-color: #072ac8;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: calibri;
+      }
+      body {
+        width: 100vw;
+        height: 100vh;
+        background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+        background-size: cover;
+        background-repeat: no-repeat;
+        overflow: hidden;
+      }
+      .container {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+      header {
+        background-color: rgb(214, 73, 51);
+        width: 28rem;
+        height: 6rem;
+        margin-top: 1rem;
+        border-top-right-radius: 1rem;
+        border-bottom-right-radius: 1rem;
+        display: flex;
+        flex-direction: column;
+        padding-top: 0.7rem;
+        padding-left: 2rem;
+        animation: slideFromLeft 1s ease forwards;
+        align-self: flex-start;
+      }
+      @keyframes slideFromLeft {
+        0% {
+          opacity: 0;
+          transform: translateX(-100%);
+        }
+        100% {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+      #heading {
+        color: var(--heading-color);
+        font-size: 2.5rem;
+        font-weight: 900;
+      }
+      #heading-caption {
+        color: var(--caption-color);
+        font-size: 1.1rem;
+        font-weight: 700;
+      }
+      .game-container {
+        align-self: center;
+        justify-self: center;
+        margin: 3.59rem auto 0;
+        width: 40%;
+        height: 65%;
+        /* background-color: beige; */
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.4rem;
+      }
+      .game-buttons {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.6rem;
+      }
+      .game-button {
+        height: 10rem;
+        width: 10rem;
+        border-radius: 5px;
+        border: none;
+        background-color: var(--button-color);
+        font-size: 6rem;
+        font-weight: 600;
+        box-shadow: 0 0 1rem rgba(0, 0, 0, 0.27);
+        transition: transform 0.1s linear 0s, box-shadow 0.1s linear 0s;
+      }
+      .game-button:hover {
+        transform: scale(1.04);
+        /* box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px; */
+        box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+      }
+      .X {
+        color: var(--X-color);
+      }
+      .O {
+        color: var(--O-color);
+      }
+      .reset-button {
+        --b: 3px; /* border thickness */
+        --s: 0.45em; /* size of the corner */
+        --color: #373b44;
+
+        padding: calc(0.5em + var(--s)) calc(0.9em + var(--s));
+        color: var(--color);
+        --_p: var(--s);
+        background: conic-gradient(
+            from 90deg at var(--b) var(--b),
+            #0000 90deg,
+            var(--color) 0
+          )
+          var(--_p) var(--_p) / calc(100% - var(--b) - 2 * var(--_p))
+          calc(100% - var(--b) - 2 * var(--_p));
+        transition: 0.3s linear, color 0s, background-color 0s;
+        outline: var(--b) solid #0000;
+        outline-offset: 0.6em;
+        font-size: 1.3rem;
+        border: 0;
+        user-select: none;
+        user-select: none;
+        touch-action: manipulation;
+      }
+      .reset-button:hover,
+      .reset-button:focus-visible {
+        --_p: 0px;
+        outline-color: var(--color);
+        outline-offset: 0.05em;
+      }
+      .reset-button:active {
+        background: var(--color);
+        color: #fff;
+      }
+      .msg-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 100vw;
+        background-color: rgba(36, 34, 34, 0.713);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        /* gap: 1rem; */
+        opacity: 0;
+        z-index: -1;
+        transition: all 1s ease 0s;
+      }
+      .show {
+        opacity: 1;
+        z-index: 0;
+      }
+      #msg-head {
+        color: var(--heading-color);
+        font-size: 6rem;
+        font-weight: 700;
+      }
+      #msg {
+        font-size: 2rem;
+        color: var(--caption-color);
+        font-weight: 550;
+        margin-bottom: 1rem;
+      }
+      .restart-button {
+        display: flex;
+        justify-content: space-around;
+        top: 20px;
+        left: 20px;
+      }
+      .restart-button button {
+        width: 150px;
+        height: 50px;
+        background-color: white;
+        margin: 20px;
+        color: #568fa6;
+        position: relative;
+        overflow: hidden;
+        font-size: 1.1rem;
+        letter-spacing: 1px;
+        font-weight: 500;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        border: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 3px;
+      }
+
+      .restart-button button:before,
+      .restart-button button:after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        background-color: #44d8a4;
+        transition: all 0.3s cubic-bezier(0.35, 0.1, 0.25, 1);
+      }
+
+      .restart-button button:before {
+        right: 0;
+        top: 0;
+        transition: all 0.5s cubic-bezier(0.35, 0.1, 0.25, 1);
+      }
+
+      .restart-button button:after {
+        left: 0;
+        bottom: 0;
+      }
+
+      .restart-button button span {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        margin: 0;
+        padding: 0;
+        z-index: 1;
+      }
+
+      .restart-button button span:before,
+      .restart-button button span:after {
+        content: "";
+        position: absolute;
+        width: 2px;
+        height: 0;
+        background-color: #44d8a4;
+        transition: all 0.3s cubic-bezier(0.35, 0.1, 0.25, 1);
+      }
+
+      .restart-button button span:before {
+        right: 0;
+        top: 0;
+        transition: all 0.5s cubic-bezier(0.35, 0.1, 0.25, 1);
+      }
+
+      .restart-button button span:after {
+        left: 0;
+        bottom: 0;
+      }
+
+      .restart-button button p {
+        padding: 0;
+        margin: 0;
+        transition: all 0.4s cubic-bezier(0.35, 0.1, 0.25, 1);
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
+
+      .restart-button button p:before,
+      .restart-button button p:after {
+        position: absolute;
+        width: 100%;
+        transition: all 0.4s cubic-bezier(0.35, 0.1, 0.25, 1);
+        z-index: 1;
+        left: 0;
+      }
+
+      .restart-button button p:before {
+        content: attr(data-title);
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .restart-button button p:after {
+        content: attr(data-text);
+        top: 150%;
+        color: #44d8a4;
+      }
+
+      .restart-button button:hover:before,
+      .restart-button button:hover:after {
+        width: 100%;
+      }
+
+      .restart-button button:hover span {
+        z-index: 1;
+      }
+
+      .restart-button button:hover span:before,
+      .restart-button button:hover span:after {
+        height: 100%;
+      }
+
+      .restart-button button:hover p:before {
+        top: -50%;
+        transform: rotate(5deg);
+      }
+
+      .restart-button button:hover p:after {
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .restart-button button.start {
+        background-color: #44d8a4;
+        box-shadow: 0px 5px 10px -10px rgba(0, 0, 0, 0.2);
+        transition: all 0.2s ease;
+      }
+
+      .restart-button button.start p:before {
+        top: -50%;
+        transform: rotate(5deg);
+      }
+
+      .restart-button button.start p:after {
+        color: white;
+        transition: all 0s ease;
+        content: attr(data-start);
+        top: 50%;
+        transform: translateY(-50%);
+        animation: start 0.3s ease;
+        animation-fill-mode: forwards;
+      }
+
+      @keyframes start {
+        from {
+          top: -50%;
+        }
+      }
+
+      .restart-button button.start:hover:before,
+      .restart-button button.start:hover:after {
+        display: none;
+      }
+
+      .restart-button button.start:hover span {
+        display: none;
+      }
+
+      .restart-button button:active {
+        outline: none;
+        border: none;
+      }
+
+      .restart-button button:focus {
+        outline: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1 id="heading">The game of Xs and Os</h1>
+        <span id="heading-caption">A classical game of Tic-Tac-Toe</span>
+      </header>
+
+      <main class="game-container">
+        <div class="game-buttons">
+          <button class="game-button X" id="game-button_01"></button>
+          <button class="game-button X" id="game-button_02"></button>
+          <button class="game-button X" id="game-button_03"></button>
+          <button class="game-button X" id="game-button_04"></button>
+          <button class="game-button X" id="game-button_05"></button>
+          <button class="game-button X" id="game-button_06"></button>
+          <button class="game-button X" id="game-button_07"></button>
+          <button class="game-button X" id="game-button_08"></button>
+          <button class="game-button X" id="game-button_09"></button>
+        </div>
+        <button class="reset-button">Reset Game</button>
+      </main>
+    </div>
+
+    <div class="msg-container">
+      <p id="msg-head"></p>
+      <p id="msg"></p>
+      <div class="restart-button">
+        <button class="new-game-button">
+          <span></span>
+          <p
+            data-start="good luck!"
+            data-text="start!"
+            data-title="new game"
+          ></p>
+        </button>
+      </div>
+    </div>
+
+    <script>
+      let boxes = document.querySelectorAll(".game-button");
+      let gameBox = document.querySelector(".game-buttons");
+      let resetButton = document.querySelector(".reset-button");
+      let newGameButton = document.querySelector(".new-game-button");
+      let msgContainer = document.querySelector(".msg-container");
+      let msgHead = document.querySelector("#msg-head");
+      let msg = document.querySelector("#msg");
+
+      let turnX = true; //playerX turn
+      let turnCount = 0;
+
+      let winPatterns = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6],
+      ];
+
+      function disableBoxes() {
+        for (let box of boxes) {
+          box.disabled = true;
+        }
+      }
+
+      function enableBoxes() {
+        for (let box of boxes) {
+          box.disabled = false;
+          box.innerText = "";
+        }
+      }
+
+      boxes.forEach((box) => {
+        function boxClicked() {
+          // console.log("Box was clicked");
+          if (turnX) {
+            turnCount++;
+            box.classList.remove("O");
+            box.classList.add("X");
+            box.innerText = "X";
+            turnX = false;
+          } else {
+            turnCount++;
+            box.classList.remove("X");
+            box.classList.add("O");
+            box.innerText = "O";
+            turnX = true;
+          }
+          box.disabled = true;
+          checkWinner();
+        }
+        box.addEventListener("click", boxClicked);
+      });
+
+      const showWinner = (winner) => {
+        if (winner == "O" || winner == "X") {
+          msgHead.innerHTML = "&#127942; WINNER &#127942;";
+          msg.innerText =
+            "Congratulations, Player " + winner + " is the winner";
+        } else {
+          msgHead.innerHTML = "&#129309; DRAW &#129309;";
+          msg.innerText = "The match is drawn between both the players";
+        }
+        msgContainer.classList.add("show");
+        disableBoxes();
+      };
+
+      function checkWinner() {
+        for (let pattern of winPatterns) {
+          let pos1val = boxes[pattern[0]].innerText;
+          let pos2val = boxes[pattern[1]].innerText;
+          let pos3val = boxes[pattern[2]].innerText;
+
+          if (pos1val != "" && pos2val != "" && pos3val != "") {
+            if (
+              pos1val === pos2val &&
+              pos2val === pos3val &&
+              pos1val === pos3val
+            ) {
+              showWinner(pos1val);
+              return;
+            }
+          }
+        }
+        if (turnCount == 9) {
+          showWinner("draw");
+        }
+      }
+
+      const resetGame = () => {
+        turnX = true;
+        turnCount = 0;
+        enableBoxes();
+        msgContainer.classList.remove("show");
+      };
+
+      newGameButton.addEventListener("click", resetGame);
+      resetButton.addEventListener("click", resetGame);
+    </script>
+  </body>
+</html>
