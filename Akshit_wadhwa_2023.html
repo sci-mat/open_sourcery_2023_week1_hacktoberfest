@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Make All Stops</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    .navbar {
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .navbar-logo {
+      width: 400px;
+      height: 100px;
+      margin-right: 10px;
+      position: relative;
+    }
+
+    .navbar p {
+      font-family: 'Playfair Display', serif;
+      font-size: 1em;
+      margin: 0;
+    }
+
+    .navbar ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      margin: 0;
+      gap: 20px;
+    }
+
+    .navbar ul li {
+      margin: 0 10px;
+    }
+
+    .navbar ul li a {
+      text-decoration: none;
+      color: black;
+      font-size: 1.2em;
+      margin: 10px;
+    }
+
+    .navbar .social-icons {
+      display: flex;
+    }
+
+    .navbar .social-icons a {
+      margin-left: 10px;
+      font-size: 1.5em;
+      color: black;
+    }
+
+    .main-content {
+      background-image: url('back-image.jpg');
+      background-size: contain;
+      background-position: center;
+      position: relative;
+      height: 60vh;
+    }
+
+    .main-content .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .main-content .overlay h2 {
+      font-size: 2em;
+      margin: 0;
+    }
+
+    .services {
+      background-color: #f5f5f5;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .services h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5em;
+      margin: 0;
+    }
+
+    .services .description {
+      background-color: white;
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 20px 0;
+      font-size: 1.2em;
+      border-radius: 10px;
+    }
+
+    .services .btn {
+      background-color: #d3d3d3;
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 20px 0;
+      font-size: 1.5em;
+      border-radius: 20px;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .services .service-items {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+    }
+
+    .services .service-item {
+      width: 30%;
+      background-color: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .services .service-item img {
+      width: 100%;
+      height: auto;
+    }
+
+    .partners-section {
+      background-color: #dcc6c6;
+      padding: 50px 0;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .partners-section h1 {
+      font-size: 36px;
+      margin-bottom: 30px;
+    }
+
+    .partners-logos img {
+      margin: 0 15px;
+      height: 100px;
+    }
+
+    .contact {
+      background-color: #000;
+      color: #fff;
+      padding: 50px 20px;
+      text-align: center;
+    }
+
+    .contact h2 {
+      font-size: 36px;
+      font-weight: bold;
+      margin: 0 0 20px;
+    }
+
+    .contact p {
+      font-size: 18px;
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <div>
+      <div class="navbar-logo">
+        <img src="nav.png" alt="Logo" class="navbar-logo">
+      </div>
+      <p>“Your one stop destination for all event management needs”</p>
+    </div>
+    <ul>
+      <li><a href="/index.html" class="btn">Home</a></li>
+      <li><a href="/portfolio.html" class="btn">Portfolio</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Blogs</a></li>
+      <li><a href="#">Services</a></li>
+    </ul>
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-facebook"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-youtube"></i></a>
+    </div>
+  </div>
+
+  <div class="main-content">
+    <div class="overlay">
+      <h2>YOUR DREAM TO MAKE THE PERFECT EVENT IS NOW UPON US. YOUR PERSONAL EVENT MAKERS ARE JUST ONE CLICK AWAY.</h2>
+    </div>
+  </div>
+
+  <div class="services">
+    <h2>Our Services</h2>
+    <div class="description">
+      <input class="inp1" type="text" placeholder="search your event">
+    </div>
+    <a href="loginpage.html" class="btn">Book Now!</a>
+    <div class="service-items">
+      <div class="service-item">
+        <img src="https://storage.googleapis.com/a1aa/image/fFqggS8y6LyNB6FyJmFJCdynpu8tMtrGqIfPfraT76HWwSFnA.jpg" alt="People enjoying an office event with food and drinks" height="200" width="300"/>
+        <li><a href="/office.html" class="btn">OFFICE PARTIES</a></li>
+      </div>
+      <div class="service-item">
+        <img src="https://storage.googleapis.com/a1aa/image/Wk77UolKqPJCNdwG1mI4k52Udti2tnq8qxqpTPqzjqFDWq4E.jpg" alt="A birthday party setup with balloons and sweets" height="200" width="300"/>
+        <li><a href="/birthday.html" class="btn">Birthday Parties</a></li>
+      </div>
+      <div class="service-item">
+        <img src="https://storage.googleapis.com/a1aa/image/dfLJhb4B4xyrPSITrspcDYzG9H0ld9MKv0J0xJOLbITHsUxJA.jpg" alt="A wedding function setup with tables and decorations" height="200" width="300"/>
+        <li><a href="/wedding.html" class="btn">Wedding events</a></li>
+      </div>
+    </div>
+  </div>
+
+  <div class="partners-section" id="partners">
+    <h1>Our Esteemed Partners</h1>
+    <div class="partners-logos">
+        <img src="https://storage.googleapis.com/a1aa/image/M5iMjxJI3yakHdL68j1D9VN0B6es8bRfFcGVnGOaXQXekdGnA.jpg" alt="Red Bull logo" width="100" height="100">
+        <img src="https://storage.googleapis.com/a1aa/image/ZIssFFModRqVChlWRXfhc5RxeBNLbzNZ517vIfeSRX63J7MOB.jpg" alt="House logo" width="100" height="100">
+        <img src="https://storage.googleapis.com/a1aa/image/niLWCbPFY5qvKdD1BIBPXXt3zyj9spiQyOGVFZiYUEFosz4E.jpg" alt="Dior logo" width="100" height="100">
+        <img src="https://storage.googleapis.com/a1aa/image/Qw5ehLBPb3wvayohwB66pBQavglbuDmbAQpN0CWLfPPUyOjTA.jpg" alt="Domino's logo" width="100" height="100">
+        <img src="https://storage.googleapis.com/a1aa/image/5Yun6Hvvw7JaKpHjNOaax83l9eoR7QfwYpkF37acGRVWyOjTA.jpg" alt="Starbucks logo" width="100" height="100">
+        <img src="https://storage.googleapis.com/a1aa/image/sf3QpyZNcjQELCbuytY2Y2EmvxWjfgsvPeMsRA1fNN2fS2ZcC.jpg" alt="Subway logo" width="100" height="100">
+      </div>
+    </div>
+  
+    <div class="contact">
+      <h2>Contact Us</h2>
+      <p>Email: info@makeallstops.com</p>
+      <p>Working Hours: Mon - Fri, 9 AM - 6 PM</p>
+    </div>
+  </body>
+  </html>
+
+
