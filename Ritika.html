@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Manager with OOP</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        input, button {
+            margin: 5px;
+            padding: 5px;
+        }
+        #output {
+            margin-top: 20px;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Array Manager with OOP</h1>
+    <input type="text" id="initialArray" placeholder="Enter initial elements (comma-separated)">
+    <button onclick="arrayManager.createArray()">Create Array</button>
+
+    <h3>Remove Element by Index</h3>
+    <input type="number" id="removeIndex" placeholder="Enter index to remove">
+    <button onclick="arrayManager.removeElementByIndex()">Remove Element</button>
+
+    <h3>Replace Element with Multiple Elements</h3>
+    <input type="number" id="replaceIndex" placeholder="Enter index to replace">
+    <input type="text" id="replaceElements" placeholder="Enter new elements (comma-separated)">
+    <button onclick="arrayManager.replaceElement()">Replace</button>
+
+    <h3>Insert Elements at a Particular Index</h3>
+    <input type="number" id="insertIndex" placeholder="Enter index to insert at">
+    <input type="text" id="insertElements" placeholder="Enter elements to insert (comma-separated)">
+    <button onclick="arrayManager.insertElements()">Insert</button>
+
+    <div id="output"></div>
+
+    <script>
+        class ArrayManager {
+            constructor() {
+                this.array = [];
+            }
+
+            // Method to create an array from user input
+            createArray() {
+                const initialArrayInput = document.getElementById('initialArray').value;
+                this.array = initialArrayInput.split(',').map(item => item.trim());
+                this.displayArray();
+            }
+
+            // Method to remove an element by index
+            removeElementByIndex() {
+                const index = parseInt(document.getElementById('removeIndex').value, 10);
+                if (isNaN(index) || index < 0 || index >= this.array.length) {
+                    alert('Please enter a valid index.');
+                    return;
+                }
+                this.array.splice(index, 1);
+                this.displayArray();
+            }
+
+            // Method to replace an element with multiple elements
+            replaceElement() {
+                const index = parseInt(document.getElementById('replaceIndex').value, 10);
+                const replaceElements = document.getElementById('replaceElements').value.split(',').map(item => item.trim());
+
+                if (isNaN(index) || index < 0 || index >= this.array.length) {
+                    alert('Please enter a valid index.');
+                    return;
+                }
+
+                // Use splice to replace the element at the given index with multiple elements
+                this.array.splice(index, 1, ...replaceElements);
+                this.displayArray();
+            }
+
+            // Method to insert elements at a specific index
+            insertElements() {
+                const index = parseInt(document.getElementById('insertIndex').value, 10);
+                const elementsToInsert = document.getElementById('insertElements').value.split(',').map(item => item.trim());
+
+                if (isNaN(index) || index < 0 || index > this.array.length) {
+                    alert('Please enter a valid index.');
+                    return;
+                }
+
+                // Use splice with 0 as the second parameter to insert elements without removing any
+                this.array.splice(index, 0, ...elementsToInsert);
+                this.displayArray();
+            }
+
+            // Method to display the current state of the array
+            displayArray() {
+                document.getElementById('output').innerText = `Current Array: [${this.array.join(', ')}]`;
+            }
+        }
+
+        // Create an instance of ArrayManager
+        const arrayManager = new ArrayManager();
+    </script>
+</body>
+</html>
